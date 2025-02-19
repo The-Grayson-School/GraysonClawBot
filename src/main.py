@@ -43,6 +43,10 @@ def drive_task():
     drive_left = 0
     drive_right = 0
 
+    # set drive motors to break when not powered.
+    left_drive_1.set_stopping(BRAKE)
+    right_drive_1.set_stopping(BRAKE)
+
     # setup the claw motor
     claw_motor.set_max_torque(25, PERCENT)
     claw_motor.set_stopping(HOLD)
