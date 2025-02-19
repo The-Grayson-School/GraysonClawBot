@@ -77,8 +77,9 @@ def drive_task():
             drive_side = 0
 
         # Compute drive strengths of individual motors
-        drive_left = drive_forward + drive_side
-        drive_right = drive_forward - drive_side
+        turn_ratio = 0.5
+        drive_left = drive_forward + turn_ratio * drive_side
+        drive_right = drive_forward - turn_ratio * drive_side
 
         # Now send all drive values to motors
 
