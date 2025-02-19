@@ -60,17 +60,21 @@ def drive_task():
         # control_l2  = (controller.buttonUp.pressing() - controller.buttonDown.pressing()) * MAX_SPEED
         # control_r2  = (controller.buttonA.pressing() - controller.buttonB.pressing()) * MAX_SPEED
 
-        # joystick tank control
-        drive_left = controller.axis3.position()
-        drive_right = controller.axis2.position()
+        # read joysticks
+        drive_forward = controller.axis3.position()
+        drive_side = controller.axis4.position()
 
         # threshold the variable channels so the drive does not
         # move if the joystick axis does not return exactly to 0
         deadband = 15
-        if abs(drive_left) < deadband:
-            drive_left = 0
-        if abs(drive_right) < deadband:
-            drive_right = 0
+        if abs(drive_forward) < deadband:
+            drive_forward = 0
+        if abs(drive_side) < deadband:
+            drive_side = 0
+
+        # Compute drive strengths of individual motors
+        drive_left = drive_forward + drive_side
+        drive_right = drive_forward - drive_side
 
         # Now send all drive values to motors
 
